@@ -8,6 +8,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { StoreProvider } from "./utils/GlobalState";
+import { Provider } from "react-redux";
 
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
@@ -41,20 +42,22 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
-          <StoreProvider>
-            <Nav />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/orderHistory" component={OrderHistory} />
-              <Route exact path="/products/:id" component={Detail} />
-              <Route exact path="/success" component={Success} />
-              <Route component={NoMatch} />
-            </Switch>
-          </StoreProvider>
-        </div>
+        <Provider>
+          <div>
+            <StoreProvider>
+              <Nav />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/orderHistory" component={OrderHistory} />
+                <Route exact path="/products/:id" component={Detail} />
+                <Route exact path="/success" component={Success} />
+                <Route component={NoMatch} />
+              </Switch>
+            </StoreProvider>
+          </div>
+        </Provider>
       </Router>
     </ApolloProvider>
   );
